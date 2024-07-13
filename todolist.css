@@ -1,0 +1,82 @@
+/* ...............................styling on main body ............................. */
+body{
+    padding: 0;
+    margin: 0;
+    background-color:#050C9C;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* ...............................styling on main heading .......................*/
+h1{
+    color: white;
+    font-size: 45px;
+}
+/* ..................styling on main container in which all the work will done ..................*/
+#mainContainer{
+    height: 400px;
+    width: 600px;
+    background-color:#3572EF ;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+/* ...............................styling on input container........................ */
+
+#inputContainer input{
+    height: 30px;
+    width: 200px;
+    color:white;
+    background: #050C9C;
+    font-size: 16px;
+    border-style: none;
+}
+
+#inputContainer button{
+    height: 35px;
+    width:80px;
+    cursor: pointer;
+}
+/*..............................styling on to-do-list container.................. */
+.cssList{
+    list-style: none !important;
+    margin-top: 30px;
+    background-color:#3ABEF9;
+    /* border: 1px solid black; */
+    height: 250px;
+    width: 500px;
+    overflow:scroll;
+    white-space:inherit;
+}
+.cssList::-webkit-scrollbar{
+    border-style: none;
+}
+/* ...........................styling on list item of the list which will be push
+after the click on submit button ..................................................*/
+.cssList li{
+    height: 100px;
+    width:450px ;
+    /* background-color: #A7E6FF; */
+    /* border: 1px solid black; */
+    margin:20px 10px 10px -20px;
+    padding: 0;
+    position: relative;
+}
+.cssList li p{
+    font-size: 16px;
+}
+.cssList li p input{
+    cursor: pointer;
+}
+.cssList li i{
+    cursor: pointer;
+    position: absolute;
+    margin-top: -70px;
+    margin-left: 450px;
+    color: #050C9C;
+
+}
