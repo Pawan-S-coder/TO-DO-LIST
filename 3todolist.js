@@ -1,7 +1,9 @@
-// ..........................adding function for taking input from user in to-do-list on click of submit button.................................
+// ..........................add event listener on input button inputByUser function works................................
 
 document.getElementById('addInput').addEventListener('click',()=>inputByUser());
-// .........................loading  all the dom content before the submit button or  any activity.........................
+
+// .........................load  all the list which is saved in local storage on page load.........................
+
 document.addEventListener('DOMContentLoaded',()=>loadSavedData());
 
 
@@ -25,64 +27,67 @@ function  creatingList(value,isComplete){
     const listContainer=document.getElementById('list');
     const listEl= document.createElement('li');
     listEl.classList.add('listEl');
-    listEl.innerHTML=`<p class="listContent"><input type="checkbox" class="checkBox" ${isComplete?'checked':''}><span>${value}</span></p><i class="fa-solid fa-xmark remover"></i>`;
+    listEl.innerHTML=`<p class="listContent"><input type="checkbox" class="checkBox" ${isComplete?'checked':''}>
+    <span class="span">${value}</span></p><i class="fa-solid fa-xmark remover"></i>`;
     listContainer.appendChild(listEl);
-    
-    const removeIcon=listEl.querySelector('.remover');
-    const checkBoxs=listEl.querySelector(".checkBox");
+// .............adding line through class if the li item is checked...............................................
+    let text=listEl.querySelector('.span');
+    if(isComplete===true){
+        text.classList.add('line-through');
+    }
+
     // ...........................adding event listener to the remove icon..........................
-   removeIcon.addEventListener('click',()=>{
-    removeEl(listEl);
-    savedItem();
+    const removeIcon=listEl.querySelector('.remover');
+        removeIcon.addEventListener('click',()=>{
+        removeEl(listEl);
+        savedItem();
 });
 // ...............................adding event listener to checkbox checked or unchecked..........................
-   checkBoxs.addEventListener('change',(e)=>{
+    const checkBox=listEl.querySelector(".checkBox");
+    checkBox.addEventListener('change',(e)=>{
     toggleChecked(e,listEl);
     savedItem();
-
-   });
+});
 }
 
 // ...........................function removing the list element if clicked on the x mark................
-function removeEl(listEl){
+
+
+    function removeEl(listEl){
     listEl.remove();
     savedItem();
-   }
-
+}
 
 //    ...................function for toggle checklist.......................................
-   function toggleChecked(e,listEl){
-    const textSpan=listEl.querySelector('span');
+
+
+    function toggleChecked(e,listEl){
+    const textSpan=listEl.querySelector('.span');
     if(e.target.checked){
         textSpan.classList.add('line-through');
-        
     }else{
         textSpan.classList.remove('line-through');
-        
     };
-    savedItem();
-    
- }
+}
 
 
 //  ..............................add function to save data in local storage.........................
- function savedItem(){
+
+
+    function savedItem(){
     const listItem=[];
     document.querySelectorAll('.listEl').forEach(listEl=>{
-        const text=listEl.querySelector('span').innerText;
+        const text=listEl.querySelector('.span').innerText;
         const isComplete=listEl.querySelector('.checkBox').checked;
         listItem.push({text,isComplete});
     });
     localStorage.setItem('todolist',JSON.stringify(listItem));
-
- }
+}
 
 //  ........................... add function to load data ......................................
- function loadSavedData(){
-    const savedItems=JSON.parse(localStorage.getItem('todolist')) ||[];
-    savedItems.forEach(item=>{
+    function loadSavedData(){
+    const savedItem=JSON.parse(localStorage.getItem('todolist')) ||[];
+    savedItem.forEach(item=>{
         creatingList(item.text,item.isComplete);
-
-    })
-
- }
+})
+}
